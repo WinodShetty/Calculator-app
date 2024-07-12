@@ -17,35 +17,35 @@ function Calculator() {
 
   const handleEqual = () => {
     try {
-     
+      // Check for empty input
       if (input === '') {
         setResult('Error');
         return;
       }
 
-      
+      // Improved Division by Zero Handling
       const parts = input.split('/');
       if (parts.length > 1 && parts.includes('0') && !parts.every((part) => part === '0')) {
         setResult('Infinity');
         return;
       }
 
-      
+      // Check for division zero by zero
       if (input === '0/0') {
         setResult('NaN');
         return;
       }
 
-    
+      // Check for incomplete expressions (alternative approach)
       if (!/\d+$/.test(input)) {
         setResult('Error');
         return;
       }
 
-     
+      // Evaluate the expression using Function constructor
       const evaluatedResult = new Function('return ' + input)();
 
-     
+      // Handle large number results to string conversion
       setResult(evaluatedResult.toString());
     } catch (err) {
       setResult('Error');
