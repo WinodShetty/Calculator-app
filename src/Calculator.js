@@ -40,8 +40,8 @@ function Calculator() {
         return;
       }
 
-      // Evaluate the expression
-      const evaluatedResult = eval(input.replace(/(\d)([+\-*/])/g, '$1 $2 '));
+      // Evaluate the expression safely
+      const evaluatedResult = new Function(`return ${input}`)();
       setResult(evaluatedResult.toString());
     } catch (err) {
       setResult('Error');
