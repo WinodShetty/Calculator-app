@@ -17,6 +17,7 @@ function Calculator() {
 
   const handleEqual = () => {
     try {
+      // Check for empty input
       if (input === '') {
         setResult('Error');
         return;
@@ -40,8 +41,10 @@ function Calculator() {
         return;
       }
 
-      // Evaluate the expression safely
-      const evaluatedResult = new Function(`return ${input}`)();
+      // Evaluate the expression using Function constructor
+      const evaluatedResult = new Function('return ' + input)();
+
+      // Handle large number results to string conversion
       setResult(evaluatedResult.toString());
     } catch (err) {
       setResult('Error');
