@@ -17,7 +17,7 @@ function Calculator() {
 
   const handleEqual = () => {
     try {
-      
+     
       if (input === '') {
         setResult('Error');
         return;
@@ -36,16 +36,16 @@ function Calculator() {
         return;
       }
 
-      
+    
       if (!/\d+$/.test(input)) {
         setResult('Error');
         return;
       }
 
-      
+     
       const evaluatedResult = new Function('return ' + input)();
 
-      
+     
       setResult(evaluatedResult.toString());
     } catch (err) {
       setResult('Error');
@@ -57,7 +57,23 @@ function Calculator() {
       <h1>React Calculator</h1>
       <input type="text" value={result || input} readOnly />
       <div className="buttons">
-        {/* Button rendering logic... */}
+        {['7', '8', '9', '+'].map((btn) => (
+          <button key={btn} onClick={() => handleClick(btn)}>{btn}</button>
+        ))}
+        {['4', '5', '6', '-'].map((btn) => (
+          <button key={btn} onClick={() => handleClick(btn)}>{btn}</button>
+        ))}
+        {['1', '2', '3', '*'].map((btn) => (
+          <button key={btn} onClick={() => handleClick(btn)}>{btn}</button>
+        ))}
+        {['C', '0', '=', '/'].map((btn) => (
+          <button
+            key={btn}
+            onClick={btn === 'C' ? handleClear : btn === '=' ? handleEqual : () => handleClick(btn)}
+          >
+            {btn}
+          </button>
+        ))}
       </div>
     </div>
   );
