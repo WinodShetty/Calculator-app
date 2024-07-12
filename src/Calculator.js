@@ -22,8 +22,8 @@ function Calculator() {
         return;
       }
 
-      // Check for division by zero
-      if (/\/0$/.test(input)) {
+      // Check for division by zero cases
+      if (input.includes('/0') && !input.includes('/0/0')) {
         setResult('Infinity');
         return;
       }
@@ -40,6 +40,7 @@ function Calculator() {
         return;
       }
 
+      // Evaluate the expression
       const evaluatedResult = eval(input.replace(/(\d)([+\-*/])/g, '$1 $2 '));
       setResult(evaluatedResult.toString());
     } catch (err) {
