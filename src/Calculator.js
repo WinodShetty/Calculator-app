@@ -17,34 +17,27 @@ function Calculator() {
 
   const handleEqual = () => {
     try {
-      // Check for empty input
       if (input === '') {
         setResult('Error');
         return;
       }
 
-      // Check for division by zero cases
       if (input.includes('/0') && !input.includes('/0/0')) {
         setResult('Infinity');
         return;
       }
 
-      // Check for division zero by zero
       if (input === '0/0') {
         setResult('NaN');
         return;
       }
 
-      // Check for incomplete expressions
       if (/[+\-*/]$/.test(input)) {
         setResult('Error');
         return;
       }
 
-      // Evaluate the expression using Function constructor
       const evaluatedResult = new Function('return ' + input)();
-
-      // Handle large number results to string conversion
       setResult(evaluatedResult.toString());
     } catch (err) {
       setResult('Error');
