@@ -23,9 +23,8 @@ function Calculator() {
         return;
       }
 
-      // Improved Division by Zero Handling
-      const parts = input.split('/');
-      if (parts.length > 1 && parts.includes('0') && !parts.every((part) => part === '0')) {
+      // Check for division by zero cases
+      if (input.includes('/0') && !input.includes('/0/0')) {
         setResult('Infinity');
         return;
       }
@@ -36,8 +35,8 @@ function Calculator() {
         return;
       }
 
-      // Check for incomplete expressions (alternative approach)
-      if (!/\d+$/.test(input)) {
+      // Check for incomplete expressions
+      if (/[+\-*/]$/.test(input)) {
         setResult('Error');
         return;
       }
