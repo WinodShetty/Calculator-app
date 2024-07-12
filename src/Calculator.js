@@ -1,37 +1,37 @@
 import React, { useState } from 'react';
-import './Calculator.css'; // Import CSS for styling
+import './Calculator.css';
 
 function Calculator() {
   const [input, setInput] = useState('');
-  const [error, setError] = useState('');
+  const [result, setResult] = useState('');
 
   const handleClick = (value) => {
-    if (error) setError(''); // Clear error on new input
     setInput((prevInput) => prevInput + value);
+    setResult('');
   };
 
   const handleClear = () => {
     setInput('');
-    setError('');
+    setResult('');
   };
 
   const handleEqual = () => {
     try {
       if (input === '') {
-        setError('Error');
+        setResult('Error');
       } else {
-        const result = eval(input.replace(/(\d)([+/*-])/g, '$1 $2 '));
-        setInput(result.toString());
+        const evaluatedResult = eval(input.replace(/(\d)([+/*-])/g, '$1 $2 '));
+        setResult(evaluatedResult.toString());
       }
     } catch (err) {
-      setError('Error');
+      setResult('Error');
     }
   };
 
   return (
     <div className="calculator">
       <h1>React Calculator</h1>
-      <input type="text" value={error || input} readOnly />
+      <input type="text" value={result || input} readOnly />
       <div className="buttons">
         {['7', '8', '9', '+'].map((btn) => (
           <button key={btn} onClick={() => handleClick(btn)}>{btn}</button>
