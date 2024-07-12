@@ -19,10 +19,27 @@ function Calculator() {
     try {
       if (input === '') {
         setResult('Error');
-      } else {
-        const evaluatedResult = eval(input.replace(/(\d)([+/*-])/g, '$1 $2 '));
-        setResult(evaluatedResult.toString());
+        return;
       }
+
+      // Handle division by zero
+      if (input.includes('/0')) {
+        if (input.includes('/0/0')) {
+          setResult('NaN');
+          return;
+        }
+        setResult('Infinity');
+        return;
+      }
+
+      // Check for incomplete expressions
+      if (/[+\-*/]$/.test(input)) {
+        setResult('Error');
+        return;
+      }
+
+      const evaluatedResult = eval(input.replace(/(\d)([+/*-])/g, '$1 $2 '));
+      setResult(evaluatedResult.toString());
     } catch (err) {
       setResult('Error');
     }
