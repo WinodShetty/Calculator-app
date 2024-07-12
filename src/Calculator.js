@@ -22,13 +22,15 @@ function Calculator() {
         return;
       }
 
-      // Handle division by zero
-      if (input.includes('/0')) {
-        if (input.includes('/0/0')) {
-          setResult('NaN');
-          return;
-        }
+      // Check for division by zero
+      if (/\/0$/.test(input)) {
         setResult('Infinity');
+        return;
+      }
+
+      // Check for division zero by zero
+      if (input === '0/0') {
+        setResult('NaN');
         return;
       }
 
@@ -38,7 +40,7 @@ function Calculator() {
         return;
       }
 
-      const evaluatedResult = eval(input.replace(/(\d)([+/*-])/g, '$1 $2 '));
+      const evaluatedResult = eval(input.replace(/(\d)([+\-*/])/g, '$1 $2 '));
       setResult(evaluatedResult.toString());
     } catch (err) {
       setResult('Error');
