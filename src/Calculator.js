@@ -6,8 +6,13 @@ function Calculator() {
   const [result, setResult] = useState('');
 
   const handleClick = (value) => {
+    // Handle decimal point logic
+    if (value === '.' && input.includes('.')) {
+      return; // Prevent multiple decimal points
+    }
+
     setInput((prevInput) => prevInput + value);
-    setResult('');
+    setResult(''); // Clear result on number input
   };
 
   const handleClear = () => {
@@ -18,7 +23,7 @@ function Calculator() {
   const handleEqual = () => {
     try {
       if (input === '') {
-        setResult('Error');
+        setResult('Enter an expression');
         return;
       }
 
@@ -33,7 +38,7 @@ function Calculator() {
       }
 
       if (/[+\-*/]$/.test(input)) {
-        setResult('Error');
+        setResult('Invalid expression');
         return;
       }
 
