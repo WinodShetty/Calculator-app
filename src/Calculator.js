@@ -7,11 +7,10 @@ function Calculator() {
 
   const handleClick = (value) => {
     if (value === '.' && input.includes('.')) {
-      return; // Prevent multiple decimal points
+      return;
     }
-
     setInput((prevInput) => prevInput + value);
-    setResult(''); // Clear result on number input
+    setResult('');
   };
 
   const handleClear = () => {
