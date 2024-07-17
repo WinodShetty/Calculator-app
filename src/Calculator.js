@@ -6,7 +6,6 @@ function Calculator() {
   const [result, setResult] = useState('');
 
   const handleClick = (value) => {
-    // Handle decimal point logic
     if (value === '.' && input.includes('.')) {
       return; // Prevent multiple decimal points
     }
@@ -52,7 +51,8 @@ function Calculator() {
   return (
     <div className="calculator">
       <h1>React Calculator</h1>
-      <input type="text" value={result || input} readOnly />
+      <input type="text" value={input} readOnly />
+      <div className="result">{result}</div>
       <div className="buttons">
         {['7', '8', '9', '+'].map((btn) => (
           <button key={btn} onClick={() => handleClick(btn)}>{btn}</button>
