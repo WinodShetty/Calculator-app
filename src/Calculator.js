@@ -21,28 +21,34 @@ function Calculator() {
   const handleEqual = () => {
     try {
       if (input === '') {
-        setResult('Enter an expression');
+        setResult('Invalid expression');
         return;
       }
 
-      if (input.includes('/0') && !input.includes('/0/0')) {
-        setResult('Infinity');
+      // Handle special cases
+      if (input.includes('/0')) {
+        if (input === '0/0') {
+          setResult('NaN');
+        } else {
+          setResult('Infinity');
+        }
         return;
       }
 
-      if (input === '0/0') {
-        setResult('NaN');
-        return;
-      }
-
+      // Handle invalid expression
       if (/[+\-*/]$/.test(input)) {
         setResult('Invalid expression');
         return;
       }
 
-      // Consider using a safer evaluation library like mathjs
-      const evaluatedResult = eval(input); // Or use mathjs.evaluate(input)
-      setResult(evaluatedResult.toString());
+      // Safe evaluation of the expression
+      // Note: eval is dangerous; consider using a library like mathjs in a real application
+      const evaluatedResult = eval(input);
+      if (Number.isFinite(evaluatedResult)) {
+        setResult(evaluatedResult.toString());
+      } else {
+        setResult('Error');
+      }
     } catch (err) {
       setResult('Error');
     }
