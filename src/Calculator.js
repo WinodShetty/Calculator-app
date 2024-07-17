@@ -40,7 +40,8 @@ function Calculator() {
         return;
       }
 
-      const evaluatedResult = new Function('return ' + input)();
+      // Consider using a safer evaluation library like mathjs
+      const evaluatedResult = eval(input); // Or use mathjs.evaluate(input)
       setResult(evaluatedResult.toString());
     } catch (err) {
       setResult('Error');
